@@ -1,0 +1,109 @@
+body {
+    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, helvetica neue, segoe ui, noto sans japanese, ヒラギノ角ゴ pron w3, Meiryo, sans-serif;
+}
+
+.matrix {
+    display: flex;
+    margin-bottom: 1em;
+}
+
+.matrix p {
+    margin: auto 1em auto 0;
+}
+
+table {
+    border-left: .1em solid black;
+    border-right: .1em solid black;
+    border-radius: 1em;
+}
+
+td {
+    min-width: 2em;
+    text-align: center;
+}
+
+p {
+    margin: 0;
+    margin-bottom: 1em;
+}
+
+section {
+    display: flex;
+    padding: 1em;
+    margin-bottom: 1em;
+    border-left: .5em solid gray;
+}
+
+.info {
+    flex-grow: 1;
+    padding: 1em;
+    padding-left: 5em;
+}
+
+.ij,.ih,.hj {
+    padding: .1em .5em .3em .5em;
+    color: whitesmoke;
+}
+
+.ij {
+    background: #d55e00;
+}
+.ih {
+    background: #009e73;
+}
+.hj {
+    background: #0072b2;
+}
+
+template {
+    display: none;
+}
+
+nav {
+    position: fixed;
+    right: 0;
+    top: 0;
+    border: 1px gray solid;
+    border-radius: 1em;
+    padding: 1em;
+}
+button {
+    padding: 1em;
+}
+#go {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+main {
+    padding-bottom: 50vh;
+}
+textarea {
+    font-size: 1em;
+    display: block;
+}
+
+header {
+    border-bottom: 1px gray solid;
+    margin-bottom: 1em;
+    width: 50%;
+}
+
+header a {
+    font-size: 2em;
+}
+
+header h1 {
+    font-size: 1em;
+}
+
+article {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+article p {
+    max-width: 500px;
+    padding: 1em;
+}

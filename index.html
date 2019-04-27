@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ワーシャルフロイド法ビジュアライザ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="twitter:card" content="summary">
+    <meta name="og:title" content="ワーシャルフロイド法ビジュアライザ">
+    <meta name="twitter:image" content="https://kotet.jp/cover.jpg">
+    <script src="viz.js" defer></script>
+    <script src="main.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <a href="https://kotet.jp">Kotet.jp</a>
+        <h1>ワーシャルフロイド法ビジュアライザ</h1>
+    </header>
+    <template id="replace-template">
+        <p>
+            <span class="ij">d<sub>ij</sub></span>
+            >
+            <span class="ih">d<sub>ih</sub></span>
+            +
+            <span class="hj">d<sub>hj</sub></span>
+            <span>のため更新</span>
+        </p>
+    </template>
+    <template id="unreachable-template">
+        <p>迂回ルート未発見または到達不能</p>
+    </template>
+    <template id="detour-template">
+        <p><span class="ij">d<sub>ij</sub></span>より遠回り。更新せず</p>
+    </template>
+    <template id="error-template">
+        <p>エラー</p>
+    </template>
+    <main>
+        <article>
+            <div>
+                <p>
+                        ワーシャル–フロイド法（英: Warshall–Floyd Algorithm）は、
+                        重み付き有向グラフの全ペアの最短経路問題を多項式時間で解くアルゴリズムである。
+                        名称は考案者であるスティーブン・ワーシャルとロバート・フロイドにちなむ（二人はそれぞれ独立に考案）。
+                        フロイドのアルゴリズム、ワーシャルのアルゴリズム、フロイド-ワーシャル法とも呼ばれる。
+                        (<a href="https://ja.wikipedia.org/wiki/%E3%83%AF%E3%83%BC%E3%82%B7%E3%83%A3%E3%83%AB%E2%80%93%E3%83%95%E3%83%AD%E3%82%A4%E3%83%89%E6%B3%95">フリー百科事典『ウィキペディア（Wikipedia）』</a>)
+                </p>
+            </div>
+            <div>
+                <textarea id="in" rows=10 cols=40>
+ x, x, 3,-1
+-2, x, x, x
+ 4, 2, x, 2
+ x, 4, x, x</textarea>
+                <button id="go" title="入力した行列でワーシャルフロイド法を実行します">Visualize</button>
+            </div>
+        </article>
+        <output id="log"></output>
+        <output id="ans">
+        </output>
+        <nav>
+            <button id="reset" onclick="resetCount()" title="最初に戻ります">reset</button>
+            <button id="next" onclick="nextCount()" title="押すと一回分スクロールします">next</button>
+            <button id="auto" onclick="autoCount()" title="コマ送りみたいになります">auto</button>
+        </nav>
+    </main>
+
+</body>
+
+</html>
