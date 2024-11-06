@@ -265,7 +265,7 @@ window.onload = function () {
             info.className = "info";
             ans.appendChild(section);
             section.appendChild(info);
-            info.appendChild(paragraph("最終結果"));
+            info.appendChild(paragraph("Final Result"));
             info.appendChild(matrix(D, "D"));
             info.appendChild(matrix(F, "F"));
         }

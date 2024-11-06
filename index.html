@@ -4,21 +4,114 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>ワーシャルフロイド法ビジュアライザ</title>
+    <title>Floyd-Warshall Algorithm Visualizer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="twitter:card" content="summary">
-    <meta name="og:title" content="ワーシャルフロイド法ビジュアライザ">
-    <meta name="twitter:image" content="https://kotet.jp/warshall-floyd-visualizer/cover.jpg">
+    <meta name="og:title" content="Floyd-Warshall Algorithm Visualizer">
     <script src="viz.js" defer></script>
     <script src="main.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        
+        header {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        header a {
+            color: #ffffff;
+            text-decoration: none;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        main {
+            max-width: 800px;
+            width: 90%;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        article div p {
+            line-height: 1.6;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        button {
+            padding: 8px 16px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        #go {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #reset {
+            background-color: #f44336;
+            color: white;
+        }
+
+        #next, #auto {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        nav {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        output#log, output#ans {
+            display: block;
+            padding: 15px;
+            margin: 10px 0;
+            background-color: #fafafa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            min-height: 50px;
+        }
+    </style>
 </head>
 
 <body>
     <header>
-        <a href="https://kotet.jp">Kotet.jp</a>
-        <h1>ワーシャルフロイド法ビジュアライザ</h1>
+        <h1>Floyd-Warshall Algorithm Visualizer</h1>
     </header>
     <template id="replace-template">
         <p>
@@ -27,27 +120,26 @@
             <span class="ih">d<sub>ih</sub></span>
             +
             <span class="hj">d<sub>hj</sub></span>
-            <span>のため更新</span>
+            <span> Update</span>
         </p>
     </template>
     <template id="unreachable-template">
-        <p>迂回ルート未発見または到達不能</p>
+        <p>Detour route not found or unreachable</p>
     </template>
     <template id="detour-template">
-        <p><span class="ij">d<sub>ij</sub></span>より遠回り。更新せず</p>
+        <p>Detour is longer than <span class="ij">d<sub>ij</sub></span>. No update</p>
     </template>
     <template id="error-template">
-        <p>エラー</p>
+        <p>Error</p>
     </template>
     <main>
         <article>
             <div>
                 <p>
-                        ワーシャル–フロイド法（英: Warshall–Floyd Algorithm）は、
-                        重み付き有向グラフの全ペアの最短経路問題を多項式時間で解くアルゴリズムである。
-                        名称は考案者であるスティーブン・ワーシャルとロバート・フロイドにちなむ（二人はそれぞれ独立に考案）。
-                        フロイドのアルゴリズム、ワーシャルのアルゴリズム、フロイド-ワーシャル法とも呼ばれる。
-                        (<a href="https://ja.wikipedia.org/wiki/%E3%83%AF%E3%83%BC%E3%82%B7%E3%83%A3%E3%83%AB%E2%80%93%E3%83%95%E3%83%AD%E3%82%A4%E3%83%89%E6%B3%95">フリー百科事典『ウィキペディア（Wikipedia）』</a>)
+                    The Floyd–Warshall Algorithm is an algorithm for finding shortest paths in a weighted directed graph
+                    for all pairs of nodes in polynomial time. It is named after its inventors, Stephen Warshall and Robert Floyd,
+                    who independently proposed the algorithm. It is also known as Floyd's algorithm, Warshall's algorithm, or
+                    the Floyd-Warshall Algorithm. (<a href="https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm">Wikipedia</a>)
                 </p>
             </div>
             <div>
@@ -56,16 +148,16 @@
 -2, x, x, x
  4, 2, x, 2
  x, 4, x, x</textarea>
-                <button id="go" title="入力した行列でワーシャルフロイド法を実行します">Visualize</button>
+                <button id="go" title="Run the Floyd-Warshall Algorithm with the entered matrix">Visualize</button>
             </div>
         </article>
         <output id="log"></output>
         <output id="ans">
         </output>
         <nav>
-            <button id="reset" onclick="resetCount()" title="最初に戻ります">reset</button>
-            <button id="next" onclick="nextCount()" title="押すと一回分スクロールします">next</button>
-            <button id="auto" onclick="autoCount()" title="コマ送りみたいになります">auto</button>
+            <button id="reset" onclick="resetCount()" title="Return to start">reset</button>
+            <button id="next" onclick="nextCount()" title="Scroll one step forward">next</button>
+            <button id="auto" onclick="autoCount()" title="Step automatically">auto</button>
         </nav>
     </main>
 
